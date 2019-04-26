@@ -12,3 +12,6 @@ app/.npm
 
 # Prod Bundle
 app/build
+
+
+src/main/js

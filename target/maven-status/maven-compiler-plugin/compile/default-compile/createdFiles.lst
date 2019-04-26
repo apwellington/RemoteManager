@@ -1,0 +1,4 @@
+com\claro\rpa\app\controller\ScriptLauncher.class
+com\claro\rpa\app\tools\SSHClient.class
+com\claro\rpa\app\AppApplication.class
+com\claro\rpa\app\tools\SCPClient.class
