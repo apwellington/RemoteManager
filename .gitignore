@@ -1,0 +1,14 @@
+# Logs
+app/logs
+app/*.log
+app/npm-debug.log*
+coverage
+
+# Dependency directories
+app/node_modules
+
+# Optional npm cache directory
+app/.npm
+
+# Prod Bundle
+app/build
