@@ -15,8 +15,16 @@ app/build
 
 
 src/main/js
+<<<<<<< HEAD
 bin/
 
 .idea/
 target/
 .idea/workspace.xml
+=======
+bin
+
+src/main/resources/tools
+.idea/workspace.xml
+
+>>>>>>> master
