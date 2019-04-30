@@ -3,6 +3,7 @@ package com.claro.rpa.app.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -17,9 +18,10 @@ import java.util.List;
 //@RequiredArgsConstructor
 @Entity
 @Table(name = "rpa_user")
-public class RpaUser {
+public class RpaUser implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
     private String lastname;
@@ -30,8 +32,8 @@ public class RpaUser {
     private String shareDirectoryPath;
 
 
-    @OneToMany(cascade= CascadeType.ALL, mappedBy="RpaUser")
-    @JoinColumn(name="rpa_robot_id")
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RpaRobot> rpaRobot;
 
 }

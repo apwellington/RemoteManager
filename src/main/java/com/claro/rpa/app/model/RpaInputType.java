@@ -3,7 +3,8 @@ package com.claro.rpa.app.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,13 +19,11 @@ import java.util.List;
 //@RequiredArgsConstructor
 @Entity
 @Table(name = "rpa_input_type")
-public class RpaInputType {
+public class RpaInputType implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
 
-
-    @OneToOne
-    private List<RpaRobot> rpaRobot;
 }

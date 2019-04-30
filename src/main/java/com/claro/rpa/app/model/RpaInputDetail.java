@@ -2,10 +2,8 @@ package com.claro.rpa.app.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,12 +18,12 @@ import javax.persistence.Table;
 //@RequiredArgsConstructor
 @Entity
 @Table(name = "rpa_input_detail")
-public class RpaInputDetail {
+public class RpaInputDetail implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
-    private String inputTypeId;
     private String fieldName;
 
     @OneToOne

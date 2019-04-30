@@ -3,6 +3,8 @@ package com.claro.rpa.app.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,13 +20,13 @@ import java.util.List;
 //@RequiredArgsConstructor
 @Entity
 @Table(name = "rpa_category")
-public class RpaCategory {
+public class RpaCategory implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
 
-    @OneToMany (cascade= CascadeType.ALL, mappedBy="RpaCategory")
-    @JoinColumn(name="rpa_robot_id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RpaRobot> rpaRobot;
 }

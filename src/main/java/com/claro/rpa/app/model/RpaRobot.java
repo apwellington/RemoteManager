@@ -1,11 +1,13 @@
 package com.claro.rpa.app.model;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,26 +22,37 @@ import java.time.LocalDate;
 //@RequiredArgsConstructor
 @Entity
 @Table(name = "rpa_robot")
-public class RpaRobot {
+public class RpaRobot implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private Integer category_id;
-    private Integer input_type_id;
-    private Integer user_id;
     private String name;
     private String description;
     private String version;
     private String location;
     private String status;
     private String system;
-    private LocalDate execute_date;
-    private LocalDate stop_date;
-    private LocalDate pause_time;
     private String request_by;
     private String department;
-    private String create_date;
     private String created_by;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date execute_date;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date stop_date;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date pause_time;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date create_date;
+
 
 
 
