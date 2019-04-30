@@ -41,7 +41,7 @@ public class SCPClient {
         session.disconnect();
     }
 
-    public void copyDirTO(SSHClient ssh, String remotePath, String localPath) throws JSchException, SftpException, FileNotFoundException {
+    public void copyDirTO(String remotePath, String localPath) throws JSchException, SftpException, FileNotFoundException {
         JSch jsch = new JSch();
         Session session = null;
         session = ssh.getSession();
@@ -51,11 +51,12 @@ public class SCPClient {
         ChannelSftp channel = null;
         channel = (ChannelSftp)session.openChannel("sftp");
         channel.connect();
-        File localFile = new File(localPath);
+        //File localFile = new File(localPath);
         //If you want you can change the directory using the following line.
         //"//C:"
+        LOGGER.info("Ruta Remota:" + remotePath + "Ruta Local: " + localPath);
         channel.cd(remotePath);
-        channel.put(new FileInputStream(localFile),localFile.getName());
+        channel.put(new FileInputStream(localPath), localFile.getName());
         channel.disconnect();
         session.disconnect();
     }
