@@ -19,22 +19,22 @@ public class SCPClient {
     public SCPClient(SSHClient ssh) {
         this.jsch = new JSch();
         this.ssh = ssh;
+
+        this.session = this.ssh.getSession();
+        this.session.setPassword(this.ssh.getPassword());
+        this.session.setConfig("StrictHostKeyChecking", "no");
+
+        try {
+            channel = (ChannelSftp)session.openChannel("sftp");
+        } catch (JSchException e) {
+            e.printStackTrace();
+        }
     }
 
-    public SCPClient() {
-
-    }
-
-    public void copyFileTO(String remotePath, String localPath) throws JSchException, SftpException, FileNotFoundException {
-        session = this.ssh.getSession();
-        session.setPassword(this.ssh.getPassword());
-        session.setConfig("StrictHostKeyChecking", "no");
-        //session.connect();
-        channel = (ChannelSftp)session.openChannel("sftp");
+    public void copyFileTO(String remotePath, String localPath, String filename) throws JSchException, SftpException, FileNotFoundException {
+        localPath = localPath + "\\" + filename;
         channel.connect();
         localFile = new File(localPath);
-        //If you want you can change the directory using the following line.
-        //"//C:"
         channel.cd(remotePath);
         channel.put(new FileInputStream(localFile),localFile.getName());
         channel.disconnect();
@@ -42,19 +42,7 @@ public class SCPClient {
     }
 
     public void copyDirTO(String remotePath, String localPath) throws JSchException, SftpException, FileNotFoundException {
-        JSch jsch = new JSch();
-        Session session = null;
-        session = ssh.getSession();
-        session.setPassword(ssh.getPassword());
-        session.setConfig("StrictHostKeyChecking", "no");
-        //session.connect();
-        ChannelSftp channel = null;
-        channel = (ChannelSftp)session.openChannel("sftp");
         channel.connect();
-        //File localFile = new File(localPath);
-        //If you want you can change the directory using the following line.
-        //"//C:"
-        LOGGER.info("Ruta Remota:" + remotePath + "Ruta Local: " + localPath);
         channel.cd(remotePath);
         channel.put(new FileInputStream(localPath), localFile.getName());
         channel.disconnect();

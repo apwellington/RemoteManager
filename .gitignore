@@ -18,4 +18,5 @@ src/main/js
 bin
 
 src/main/resources/tools
+.idea/workspace.xml
 

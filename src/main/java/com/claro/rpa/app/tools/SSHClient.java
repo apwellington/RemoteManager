@@ -50,13 +50,14 @@ public class SSHClient {
     public Channel getChannel(String type){
 
             try {
-                this.channel = getSession().openChannel(type = "exec");
+                this.channel = getSession().openChannel(type);
             } catch (JSchException e) {
                 e.printStackTrace();
             }
 
         return this.channel;
     }
+
 
     public Hashtable execCommand(String command){
         try {
