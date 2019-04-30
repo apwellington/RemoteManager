@@ -16,3 +16,7 @@ app/build
 
 src/main/js
 bin/
+
+.idea/
+target/
+.idea/workspace.xml
