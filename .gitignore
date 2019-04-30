@@ -15,13 +15,24 @@ app/build
 
 
 src/main/js
+<<<<<<< HEAD
+bin/
+
+.idea/
+target/
+.idea/workspace.xml
+=======
 bin
 
 src/main/resources/tools
 .idea/workspace.xml
 
+<<<<<<< HEAD
 
 .vscode
 target
 
 
+=======
+>>>>>>> master
+>>>>>>> b7c922f99d706ffe49abe46747f018a1975411a9
