@@ -1,4 +1,10 @@
-com\claro\rpa\app\controller\ScriptLauncher.class
-com\claro\rpa\app\tools\SSHClient.class
+com\claro\rpa\app\model\RpaRobot.class
+com\claro\rpa\app\tools\ConfigLoader.class
 com\claro\rpa\app\AppApplication.class
+com\claro\rpa\app\model\RpaInputType.class
 com\claro\rpa\app\tools\SCPClient.class
+com\claro\rpa\app\model\RpaUser.class
+com\claro\rpa\app\model\RpaInputDetail.class
+com\claro\rpa\app\controller\ScriptLauncher.class
+com\claro\rpa\app\model\RpaCategory.class
+com\claro\rpa\app\tools\SSHClient.class
