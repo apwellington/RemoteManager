@@ -1,16 +1,21 @@
 package com.claro.rpa.app.tools;
 
+import com.claro.rpa.app.controller.ScriptLauncher;
 import com.jcraft.jsch.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.*;
 import java.util.Hashtable;
+import java.util.logging.Logger;
 
 //"cmd.exe /c calc"
 public class SSHClient {
-    private String username;
-    private String password;
-    private int port;
-    private String host;
+    private static final java.util.logging.Logger LOGGER = Logger.getLogger(ScriptLauncher.class.getName());
+    @Getter @Setter private String username;
+    @Getter @Setter private String password;
+    @Getter @Setter private int port;
+    @Getter @Setter private String host;
     private JSch jsch;
     private Session session;
     private  Channel channel;

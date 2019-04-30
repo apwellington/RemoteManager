@@ -16,3 +16,6 @@ app/build
 
 src/main/js
 bin
+
+src/main/resources/tools
+
