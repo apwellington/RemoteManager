@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by IntelliJ IDEA.
  * User: frodriguez
- * RpaCategory
+ * RpaCategoryService
  * Date: 4/26/2019
  * Time: 2:14 PM
  */

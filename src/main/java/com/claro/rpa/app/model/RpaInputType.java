@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by IntelliJ IDEA.
  * User: frodriguez
- * RpaInputType
+ * RpaInputTypeService
  * Date: 4/26/2019
  * Time: 2:36 PM
  */

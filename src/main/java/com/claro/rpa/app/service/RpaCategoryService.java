@@ -1,12 +1,13 @@
 package com.claro.rpa.app.service;
 
-import com.claro.rpa.app.model.RpaUser;
+import com.claro.rpa.app.model.RpaCategory;
+
 
 import java.util.Optional;
 
-public interface RpaCategory {
-    public Optional<RpaUser> findById(int id);
-    public Iterable<RpaUser> findAll();
-    public RpaUser save(RpaUser user);
-    public void delete(RpaUser rpaUser);
+public interface RpaCategoryService {
+    public Optional<RpaCategory> findById(int id);
+    public Iterable<RpaCategory> findAll();
+    public RpaCategory save(RpaCategory user);
+    public void delete(RpaCategory rpaUser);
 }

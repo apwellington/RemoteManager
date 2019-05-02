@@ -8,16 +8,29 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class RpaUserService {
+public class RpaUserServiceImpl implements RpaUserService{
 
     @Autowired
     private RpaUserRepository rpaUserRepository;
 
+    @Override
     public Optional<RpaUser> findById(int id){
+
         return rpaUserRepository.findById(id);
     }
 
+    @Override
     public Iterable<RpaUser> findAll(){
         return rpaUserRepository.findAll();
+    }
+
+    @Override
+    public RpaUser save(RpaUser user) {
+        return rpaUserRepository.save(user);
+    }
+
+    @Override
+    public void delete(RpaUser rpaUser) {
+        rpaUserRepository.delete(rpaUser);
     }
 }

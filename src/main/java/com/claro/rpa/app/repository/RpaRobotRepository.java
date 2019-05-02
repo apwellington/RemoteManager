@@ -1,4 +1,7 @@
 package com.claro.rpa.app.repository;
 
-public interface RpaRobotRepository {
+import com.claro.rpa.app.model.RpaRobot;
+import org.springframework.data.repository.CrudRepository;
+
+public interface RpaRobotRepository extends CrudRepository<RpaRobot, Integer> {
 }

@@ -1,12 +1,9 @@
 package com.claro.rpa.app.controller;
 
 import com.claro.rpa.app.model.RpaUser;
-import com.claro.rpa.app.service.RpaUserService;
+import com.claro.rpa.app.service.RpaUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +12,7 @@ import java.util.List;
 public class RpaUserController {
 
     @Autowired
-    RpaUserService userService;
+    RpaUserServiceImpl userService;
 
     @GetMapping("/all")
     public List<RpaUser> allUsers(){
@@ -25,6 +22,16 @@ public class RpaUserController {
     @GetMapping("/{id}")
     public RpaUser allUsers(@PathVariable int id){
         return userService.findById(id).get();
+    }
+
+    @PostMapping("/save")
+    public String save(@RequestBody RpaUser rpaUser){
+        return "";
+    }
+
+    @PostMapping("/delete")
+    public String delete(){
+        return "";
     }
 
 }

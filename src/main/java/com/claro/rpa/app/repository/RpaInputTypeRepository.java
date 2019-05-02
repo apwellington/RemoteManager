@@ -1,4 +1,7 @@
 package com.claro.rpa.app.repository;
 
-public interface RpaInputTypeRepository {
+import com.claro.rpa.app.model.RpaInputType;
+import org.springframework.data.repository.CrudRepository;
+
+public interface RpaInputTypeRepository extends CrudRepository<RpaInputType, Integer> {
 }
