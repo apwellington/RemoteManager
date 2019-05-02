@@ -51,7 +51,11 @@ class Robots extends Component {
     <tr>
       <th scope="row">Robot 3</th>
       <td>Ejecutar</td>
-      <td><button type="button" className="btn btn-danger" onClick={this.handleClick}>Ejecutar</button></td>
+      <td>
+        <button type="button" className="btn btn-danger" onClick={this.handleClick}>Ejecutar</button>
+        <button type="button" className="btn btn-danger" onClick={this.handleClick}>Info</button>
+        <button type="button" className="btn btn-danger" onClick={this.handleClick}>Ver</button>
+      </td>
       
     </tr>
   </tbody>
