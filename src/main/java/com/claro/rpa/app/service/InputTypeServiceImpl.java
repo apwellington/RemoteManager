@@ -1,14 +1,14 @@
 package com.claro.rpa.app.service;
 
 import com.claro.rpa.app.model.RpaInputType;
-import com.claro.rpa.app.repository.RpaInputTypeRepository;
+import com.claro.rpa.app.repository.InputTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
-public class RpaInputTypeServiceImpl implements RpaInputTypeService {
+public class InputTypeServiceImpl implements InputTypeService {
     @Autowired
-    private RpaInputTypeRepository repository;
+    private InputTypeRepository repository;
 
     @Override
     public Optional<RpaInputType> findById(int id) {

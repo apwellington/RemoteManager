@@ -1,15 +1,15 @@
 package com.claro.rpa.app.service;
 
 import com.claro.rpa.app.model.RpaRobot;
-import com.claro.rpa.app.repository.RpaRobotRepository;
+import com.claro.rpa.app.repository.RobotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
-public class RpaRobotServiceImpl implements RpaRobotService{
+public class RobotServiceImpl implements RobotService {
 
     @Autowired
-    private RpaRobotRepository repository;
+    private RobotRepository repository;
 
 
     @Override

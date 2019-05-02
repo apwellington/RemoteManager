@@ -1,15 +1,16 @@
 package com.claro.rpa.app.service;
 
 import com.claro.rpa.app.model.RpaCategory;
-import com.claro.rpa.app.repository.RpaCategoryRepository;
+import com.claro.rpa.app.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
-public class RpaCategoryImpl implements RpaCategoryService {
+@Service
+public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
-    private RpaCategoryRepository repository;
+    private CategoryRepository repository;
 
     @Override
     public Optional<RpaCategory> findById(int id) {

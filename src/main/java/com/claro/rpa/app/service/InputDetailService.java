@@ -5,7 +5,7 @@ import com.claro.rpa.app.model.RpaUser;
 
 import java.util.Optional;
 
-public interface RpaInputDetailService {
+public interface InputDetailService {
     public Optional<RpaInputDetail> findById(int id);
     public Iterable<RpaInputDetail> findAll();
     public RpaInputDetail save(RpaInputDetail rpaIputDetail);

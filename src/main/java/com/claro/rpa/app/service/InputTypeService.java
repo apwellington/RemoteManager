@@ -4,7 +4,7 @@ import com.claro.rpa.app.model.RpaInputType;
 
 import java.util.Optional;
 
-public interface RpaInputTypeService {
+public interface InputTypeService {
     public Optional<RpaInputType> findById(int id);
     public Iterable<RpaInputType> findAll();
     public RpaInputType save(RpaInputType rpaInputType);
