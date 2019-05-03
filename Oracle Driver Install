@@ -1,0 +1,11 @@
+Download the ojdbc jar from here
+
+put ojdb6.jar in some folder in your project (let's use lib).
+
+<dependency>
+<groupId>com.oracle</groupId>
+<artifactId>ojdbc</artifactId>
+<version>11.2.0</version>
+<scope>system</scope>
+<systemPath>${basedir}/lib/ojdbc6.jar</systemPath>
+Then do mvn install:install-file -Dfile=path/to/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
