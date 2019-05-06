@@ -16,14 +16,14 @@ app/build
 
 src/main/js
 
+src/main/js/
 bin/
-
 .idea/
 target/
 .idea/workspace.xml
 
+src/main/resources/tools/
+.vscode
 
-src/main/resources/tools
-.idea/workspace.xml
 
 

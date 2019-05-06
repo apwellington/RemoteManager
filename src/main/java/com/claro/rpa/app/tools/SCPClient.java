@@ -5,7 +5,6 @@ import com.claro.rpa.app.controller.ScriptLauncher;
 import com.jcraft.jsch.*;
 
 import java.io.*;
-import java.util.Properties;
 import java.util.logging.Logger;
 
 public class SCPClient {

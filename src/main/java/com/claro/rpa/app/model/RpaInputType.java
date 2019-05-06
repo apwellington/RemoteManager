@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by IntelliJ IDEA.
  * User: frodriguez
- * RpaInputType
+ * InputTypeService
  * Date: 4/26/2019
  * Time: 2:36 PM
  */
@@ -22,7 +22,7 @@ import java.io.Serializable;
 public class RpaInputType implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String name;
 

@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import {Link } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -16,17 +15,17 @@ class Robots extends Component {
     return(
       <div className="container-fluid">
 
-    <div className="py-4"></div>  
+    <div className="py-4"></div>
     <h5>Lista de Robots</h5>
-    <div className="py-2"></div>  
+    <div className="py-2"></div>
 
         <div className="row">
 
           <div className="col-1">
           </div>
           <div className="col-11">
-        
-          
+
+
               <table className="table">
                 <thead>
                   <tr  className ="txt-openSans">
@@ -42,21 +41,21 @@ class Robots extends Component {
                     <td className="txt-roboto">Procesar Registros</td>
                     <td className="txt-roboto">Tipo Formulario</td>
                     <td ><button type="button" className="btn btn-danger"><Link className="text-white" to="/form">Ejecutar</Link></button></td>
-                    
+
                   </tr>
                   <tr>
                     <th className="txt-roboto">Robot 2</th>
                     <td className="txt-roboto">Procesar Registros</td>
                     <td className="txt-roboto">Tipo Archivo</td>
                     <td ><button type="button" className="btn btn-danger"><Link className="text-white" to="/fileUpload">Ejecutar</Link></button></td>
-                    
+
                   </tr>
                   <tr>
                     <th className="txt-roboto">Robot 3</th>
                     <td className="txt-roboto">Procesar Registros</td>
                     <td className="txt-roboto">Tipo Ejecucion</td>
                     <td><button type="button" className="btn btn-danger" onClick={this.handleClick}>Ejecutar</button></td>
-                    
+
                   </tr>
                 </tbody>
               </table>

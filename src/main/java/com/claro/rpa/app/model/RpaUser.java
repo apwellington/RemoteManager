@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,7 +22,7 @@ import java.util.List;
 public class RpaUser implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String name;
     private String lastname;
@@ -31,9 +32,22 @@ public class RpaUser implements Serializable {
     private String dnsAddress;
     private String shareDirectoryPath;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "authorities_users", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    private Set<RpaAuthority> authority;
+
 
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RpaRobot> rpaRobot;
 
+
+
+    public Set<RpaAuthority> getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Set<RpaAuthority> authority) {
+        this.authority = authority;
+    }
 }

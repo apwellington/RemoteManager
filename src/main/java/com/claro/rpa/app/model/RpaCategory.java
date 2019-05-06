@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by IntelliJ IDEA.
  * User: frodriguez
- * RpaCategory
+ * CategoryService
  * Date: 4/26/2019
  * Time: 2:14 PM
  */
@@ -23,7 +23,7 @@ import java.util.List;
 public class RpaCategory implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String name;
 

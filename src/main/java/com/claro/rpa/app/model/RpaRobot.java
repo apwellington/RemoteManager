@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by IntelliJ IDEA.
  * User: frodriguez
- * RpaRobot
+ * RobotService
  * Date: 4/26/2019
  * Time: 1:58 PM
  */
@@ -25,7 +25,7 @@ import java.util.List;
 public class RpaRobot implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String name;
     private String description;
