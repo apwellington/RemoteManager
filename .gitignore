@@ -14,11 +14,14 @@ app/.npm
 app/build
 
 
+src/main/js
+
 src/main/js/
 bin/
 .idea/
 target/
 .idea/workspace.xml
+
 src/main/resources/tools/
 .vscode
 

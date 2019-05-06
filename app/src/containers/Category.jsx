@@ -2,11 +2,10 @@ import React from 'react';
 
 const Category = () => (
   <div className="container-fluid">
-
-    <div className="py-3">
-     
-    <h2>Categorias</h2>
-    </div> 
+    
+        <div className="py-4"></div>  
+                <h5>Categorias</h5>
+    <div className="py-2"></div>  
 
 <div className="row">
 
@@ -15,9 +14,9 @@ const Category = () => (
   <div className="col-11">
  
   
-<table class="table">
+<table className="table">
   <thead>
-    <tr>
+    <tr className ="txt-openSans">
       <th scope="col">Nombre</th>
       <th scope="col">Descripcion</th>
       
@@ -25,20 +24,20 @@ const Category = () => (
   </thead>
   <tbody>
     <tr>
-      <th scope="row">Automatizacion</th>
-      <td>Categoria orientadaa Formulario</td>
+      <th className="txt-roboto">Automatizacion</th>
+      <td className="txt-roboto">Categoria orientadaa Formulario</td>
       
       
     </tr>
     <tr>
-      <th scope="row">Tipo Formulario</th>
-      <td>Categoria orientada tipo archivo</td>
+      <th className="txt-roboto">Tipo Formulario</th>
+      <td className="txt-roboto">Categoria orientada tipo archivo</td>
       
       
     </tr>
     <tr>
-      <th scope="row">Tipo Archivo</th>
-      <td>Categoria orientadaa Automatizacion</td>
+      <th className="txt-roboto">Tipo Archivo</th>
+      <td className="txt-roboto">Categoria orientadaa Automatizacion</td>
       
       
     </tr>
