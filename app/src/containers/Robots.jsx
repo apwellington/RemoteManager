@@ -11,6 +11,18 @@ class Robots extends Component {
 
 }
 
+
+///Hola esto es un
+
+
+  handleClick2 () {
+  axios.get('https://api.github.com/users/maecapozzi')
+    .then(response => console.log(response))
+
+}
+
+
+
   render(){
     return(
       <div className="container-fluid">
