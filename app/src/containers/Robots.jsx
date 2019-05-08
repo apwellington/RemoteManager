@@ -11,8 +11,6 @@ class Robots extends Component {
 
 }
 
-///Hola esto es un comentario
-
   render(){
     return(
       <div className="container-fluid">
