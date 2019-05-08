@@ -8,8 +8,12 @@ class Robots extends Component {
   handleClick () {
   axios.get('https://api.github.com/users/maecapozzi')
     .then(response => console.log(response))
+
+
 }
   
+
+
   
   render(){
     return(
