@@ -1,3 +1,0 @@
-INSERT INTO `rpa_user` (`id`, `dns_address`, `ip_address`, `lastname`, `name`, `password`, `share_directory_path`, `username`) VALUES (1, '192.168.1.1', '192.168.1.1', 'Rodriguez', 'Frangel', 'holamundo1', 'c://shared', 'username@password');
-INSERT INTO `rpa_user` (`id`, `dns_address`, `ip_address`, `lastname`, `name`, `password`, `share_directory_path`, `username`) VALUES (2, '192.168.1.1', '192.168.1.1', 'Adames', 'Wellington', 'holamundo2', 'c://shared', 'username@password');
-INSERT INTO `rpa_user` (`id`, `dns_address`, `ip_address`, `lastname`, `name`, `password`, `share_directory_path`, `username`) VALUES (3, '192.168.1.1', '192.168.1.1', 'Mata', 'Polanoco', 'holamundo3', 'c://shared', 'username@password');
