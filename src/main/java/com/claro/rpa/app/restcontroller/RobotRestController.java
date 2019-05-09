@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/robot")
+@RequestMapping("/api/service/robot")
 public class RobotRestController {
     
     @Autowired

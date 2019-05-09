@@ -4,6 +4,7 @@ import com.claro.rpa.app.model.RpaUser;
 
 import java.util.Optional;
 
+
 public interface UserService {
 
     public Optional<RpaUser> findById(int id);

@@ -1,8 +1,10 @@
 package com.claro.rpa.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
@@ -26,28 +28,22 @@ public class RpaUser implements Serializable {
     private Integer id;
     private String name;
     private String lastname;
+    @JsonIgnore
     private String username;
     private String password;
     private String ipAddress;
     private String dnsAddress;
     private String shareDirectoryPath;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "authorities_users", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
-    private Set<RpaAuthority> authority;
+    private boolean enabled;
 
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RpaRobot> rpaRobot;
 
 
 
-    public Set<RpaAuthority> getAuthority() {
-        return authority;
-    }
 
-    public void setAuthority(Set<RpaAuthority> authority) {
-        this.authority = authority;
-    }
+
+
 }

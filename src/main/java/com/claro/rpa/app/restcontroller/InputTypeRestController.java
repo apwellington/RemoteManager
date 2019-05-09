@@ -12,7 +12,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/inputtype")
+@RequestMapping("/api/service/inputtype")
 public class InputTypeRestController {
 
     @Autowired

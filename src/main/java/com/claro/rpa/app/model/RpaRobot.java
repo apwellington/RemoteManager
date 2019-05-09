@@ -19,7 +19,6 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @Entity
 @Table(name = "rpa_robot")
 public class RpaRobot implements Serializable {
