@@ -44,8 +44,6 @@ public class UserServiceImpl  implements UserDetailsService, UserService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         RpaUser user = userRepository.findByUsername(s);
 
-        System.out.println(user.toString());
-
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }

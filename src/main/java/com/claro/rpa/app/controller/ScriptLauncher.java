@@ -5,10 +5,13 @@ import com.claro.rpa.app.tools.SCPClient;
 import com.claro.rpa.app.tools.SSHClient;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.SftpException;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.util.logging.Logger;
+
+import javax.servlet.http.HttpSession;
 
 //Enviar comando por la url
 @RestController
@@ -58,16 +61,13 @@ public class ScriptLauncher {
     }
 
     //Copiar Directorio
-    public Object copyDir(){
+    public Object copyDir(String localPath, String remotePath, HttpSession session){
         LOGGER.info("Inicio del Metodo");
-        String localPath;
-        String remotePath;
-        ConfigLoader properties;
-
+        //ConfigLoader properties;
         try {
-            properties = new ConfigLoader(config);
-            remotePath = properties.getRemotePath();
-            localPath = properties.getLocalPath();
+            //properties = new ConfigLoader(config);
+            //remotePath = properties.getRemotePath();
+            //localPath = properties.getLocalPath();
             //datos proveniente de la base de datos
             sshClient = new SSHClient("ieuser","Passw0rd!", 22, "192.168.56.101");
             scp = new SCPClient(sshClient);
@@ -80,6 +80,13 @@ public class ScriptLauncher {
             e.printStackTrace();
         }
         return "/";
+    }
+
+
+    public String testClientConnection(String user, String password, String netAddress, int port){
+        // sshClient = new SSHClient("ieuser","Passw0rd!", 22, "192.168.56.101");
+        sshClient = new SSHClient(user,password, port, netAddress);
+        return "";
     }
 
 

@@ -18,7 +18,6 @@ import java.util.Set;
  */
 @Data
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @Entity
 @Table(name = "rpa_user")
 public class RpaUser implements Serializable {
@@ -35,6 +34,7 @@ public class RpaUser implements Serializable {
     private String dnsAddress;
     private String shareDirectoryPath;
     private boolean enabled;
+    private long token;
 
 
 
