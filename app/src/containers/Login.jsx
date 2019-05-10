@@ -1,7 +1,15 @@
 import React,{Component} from 'react';
-
+import axios from 'axios';
 
 class Login extends Component {
+
+
+
+  loginProcess () {
+  axios.get('https://api.github.com/users/maecapozzi')
+    .then(response => console.log(response))
+
+}
 
    render(){
     return(
@@ -12,31 +20,31 @@ class Login extends Component {
         {/*<h2>Login</h2>*/}
         <div className="p-4"></div>
          
-        <div class="card">
-  <div class="card-header">
+        <div className="card">
+  <div className="card-header">
     Login
   </div>
-  <div class="card-body">
+  <div className="card-body">
     
-    <form>
-              <div class="form-group">
+    
+              <div className="form-group">
                 
-                <input type="email" class="form-control" id="exampleInputEmail1" 
+                <input type="email" className="form-control" id="exampleInputEmail1" 
                 aria-describedby="emailHelp" placeholder="Enter email"/>
                 
               </div>
               
-              <div class="form-group">
+              <div className="form-group">
                 
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
               </div>
              
-              <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+              <div className="form-group form-check">
+                <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
+                <label className="form-check-label">Check me out</label>
               </div>
-              <button type="submit" class="btn btn-danger">Submit</button>
-        </form>
+              <button className="btn btn-danger" onClick={this.loginProcess }>Submit</button>
+        
 
     
     
