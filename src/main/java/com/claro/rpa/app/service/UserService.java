@@ -11,4 +11,5 @@ public interface UserService {
     public Iterable<RpaUser> findAll();
     public RpaUser save(RpaUser user);
     public void delete(RpaUser rpaUser);
+    public RpaUser findById();
 }

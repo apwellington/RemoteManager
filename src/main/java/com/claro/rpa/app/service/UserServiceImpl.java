@@ -25,6 +25,12 @@ public class UserServiceImpl  implements UserDetailsService, UserService {
         return userRepository.findById(id);
     }
 
+
+    public RpaUser findById(){
+        return userRepository.findById(11).get();
+    }
+
+
     @Override
     public Iterable<RpaUser> findAll(){
         return userRepository.findAll();

@@ -5,6 +5,7 @@ import com.claro.rpa.app.repository.RobotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,5 +33,15 @@ public class RobotServiceImpl implements RobotService {
     @Override
     public void delete(RpaRobot robot) {
         repository.delete(robot);
+    }
+
+    @Override
+    public Optional<RpaRobot> findByName(String name) {
+        return null; //pendiente
+    }
+
+    @Override
+    public List<RpaRobot> rpaRobotsByUserId(int id) {
+        return null;
     }
 }

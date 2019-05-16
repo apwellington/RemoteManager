@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.logging.Logger;
 
 //"cmd.exe /c calc"
@@ -24,7 +26,7 @@ public class SSHClient {
     BufferedReader reader = null;
     DataOutputStream dataOut = null;
 
-    Hashtable<String, Object> commandResult;
+    List<Object> commandResult;
 
     public SSHClient(String username, String password, int port, String host) {
         this.username = username;
@@ -59,7 +61,7 @@ public class SSHClient {
     }
 
 
-    public Hashtable execCommand(String command){
+    public List<Object> execCommand(String command){
         try {
             Channel chann = getChannel("exec");
             ((ChannelExec)chann).setCommand(command);
@@ -68,12 +70,12 @@ public class SSHClient {
             this.dataIn = new DataInputStream(channel.getInputStream());
             this.reader = new BufferedReader(new InputStreamReader(dataIn));
             this.dataOut = new DataOutputStream(channel.getOutputStream());
-            this.dataOut.writeBytes("Hola Mundo \r\n");
+            this.dataOut.writeBytes("-- \r\n");
 
-            this.commandResult = new Hashtable<String, Object>();
-            commandResult.put("dataInput", this.dataIn);
-            commandResult.put("dataReader", this.reader);
-            commandResult.put("dataInput", this.dataOut);
+            this.commandResult = new ArrayList<Object>();
+            commandResult.add(this.dataIn);
+            commandResult.add(this.reader);
+            commandResult.add(this.dataOut);
 
         } catch (JSchException e) {
             e.printStackTrace();
