@@ -76,6 +76,7 @@ public class SSHClient {
             commandResult.add(this.dataIn);
             commandResult.add(this.reader);
             commandResult.add(this.dataOut);
+            commandResult.add(channel.getExitStatus());
 
         } catch (JSchException e) {
             e.printStackTrace();
