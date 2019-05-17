@@ -81,7 +81,11 @@ public class ScriptLauncher {
 
             String calc = "cmd /c "+user.getShareDirectoryPath()+robot.getName();
             System.out.println("Comando 2: " + calc);
-            List<Object> res = sshClient.execCommand("cmd /C:/Users/IEUser/Desktop/share/block_notas.exe");
+            //List<Object> res = sshClient.execCommand("cmd /C:/Users/IEUser/Desktop/share/block_notas.exe");
+            List<Object> res = sshClient.execCommand("psexec \\\\127.0.0.1 -s -d -i C:\\Users\\IEUser\\Desktop\\share\\block_notas.exe");
+
+            //psexec \\\\127.0.0.1 -s -d -i  {} /k
+
        // }
 
 
