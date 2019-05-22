@@ -96,17 +96,60 @@ public class ScriptLauncher {
 
 
 
-    //Copiar Archvio
-    @RequestMapping(value = "/copy/{filename}")
-    public Object copyFile(@PathVariable("filename") String filename){
-        //return copyBot(remote, local, file2);
+    //Configurar cliente
+    @RequestMapping(value = "/config")
+    public Object config(@RequestParam("user_id") int id){
+        RpaUser user = userService.findById(id).get();
+        //activar ssh cliente y servidor
+        try {
+            //Revisar este proceso para correr bots
+            Process p= Runtime.getRuntime().exec("ssh -V"); // cero cuando es efectivo
+            p.waitFor();
+            int s = p.exitValue();
+            BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+            String  pingResult = "";
+            String inputLine;
+            // Bucle mientas reciba parametros del buffer
+            while ((inputLine = in.readLine()) != null)
+            {
+                // Muestra por pantalla cada una de las lineas que recibe
+                System.out.println("input" + inputLine);
+                // Si deseamos capturar el resultado para posteriormente
+                // utilizarlo en nuestra aplicacion
+                pingResult += inputLine;
+            }
+            in.close();
+
+            LOGGER.info("Salida de process: " + s + "----");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //Copiar psexec
+        LOGGER.info("Copiando Recursos");
+
+        this.sshClient = new SSHClient(user.getUsername(),user.getPassword(), 22, user.getDnsAddress());
+        this.scp = new SCPClient(this.sshClient);
+        try {
+            scp.copyDirTO(user.getShareDirectoryPath(),"resources/tools/PSTools");
+        } catch (JSchException e) {
+            e.printStackTrace();
+        } catch (SftpException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        //Configurar variable de entorno para psexec
         return null;
     }
 
 
     public boolean copyBot(String remotePath, String localPath , String filename, SSHClient ssh){
         try {
-            scp = new SCPClient(ssh);
+            this.scp = new SCPClient(ssh);
             scp.copyFileTO(remotePath, localPath, filename);
             return true;
         } catch (IOException | JSchException | SftpException e) {
@@ -116,32 +159,11 @@ public class ScriptLauncher {
     }
 
 
-    //Copiar Directorio
-    public Object copyDir(){
-        LOGGER.info("Inicio del Metodo");
-        String localPath;
-        String remotePath;
-        ConfigLoader properties;
-/*
-        try {
-            //properties = new ConfigLoader(config);
-           // remotePath = properties.getRemotePath();
-            //localPath = properties.getLocalPath();
-            //datos proveniente de la base de datos
-            sshClient = new SSHClient("ieuser","Passw0rd!", 22, "192.168.56.101");
-            scp = new SCPClient(sshClient);
-           // scp.copyDirTO(remotePath, localPath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSchException e) {
-            e.printStackTrace();
-        } catch (SftpException e) {
-            e.printStackTrace();
-        }
-        return "/";
-        */
-        return null;
+    public void execRuntime(String cmd){
+
     }
+
+
 
 
 }
