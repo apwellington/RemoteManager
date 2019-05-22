@@ -2,15 +2,31 @@ import React,{Component} from 'react';
 import axios from 'axios';
 
 
+let file = false;
+
 class FileUpload extends Component {
+
+
 
   executeRobotUpload () {
   axios.get('https://api.github.com/users/maecapozzi')
     .then(response => console.log(response))
 
 }
-  
+
+  verifyFileEmpty () {
+ 
+  if(file != null){
+     file = true;
+  }
+
+}
+
+
   render(){
+
+  
+
     return(
       <div className="container">
 
