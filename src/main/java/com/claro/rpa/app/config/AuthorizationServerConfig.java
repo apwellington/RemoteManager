@@ -10,9 +10,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Configuration
 @EnableAuthorizationServer
+@CrossOrigin(origins = "http://localhost:3000")
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     static final String CLIENT_ID = "rpa-client";
