@@ -36,7 +36,7 @@ public class CategoryRestController {
 
 
     @PostMapping("/save")
-    public ResponseEntity<RpaCategory> save(RpaCategory rpaCategory){
+    public ResponseEntity<RpaCategory> save(@RequestBody RpaCategory rpaCategory){
         RpaCategory created = categoryService.save(rpaCategory);
         if (created == null) {
             return ResponseEntity.notFound().build();
