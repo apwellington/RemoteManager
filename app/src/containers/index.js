@@ -4,4 +4,5 @@ export {default as Category} from './Category';
 export {default as Login} from './Login';
 export {default as FileUpload} from './FileUpload';
 export {default as Form} from './Form';
+export {default as CategoryForm} from './CategoryForm';
 

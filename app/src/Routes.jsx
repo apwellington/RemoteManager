@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Home, Robots, Category, Login, FileUpload,Form } from './containers';
+import { Home, Robots, Category, Login, FileUpload,Form, CategoryForm } from './containers';
 
 const Routes = () => (
   <Switch>
@@ -10,6 +10,7 @@ const Routes = () => (
     <Route path="/login" component={Login} />
     <Route path="/fileUpload" component={FileUpload} />
     <Route path="/form" component={Form} />
+    <Route path="/addCategory" component={CategoryForm} />
   </Switch>
 );
 
