@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class CategoryRestController {
 
 
     @PostMapping("/save")
-    public ResponseEntity<RpaCategory> save(RpaCategory rpaCategory){
+    public ResponseEntity<RpaCategory> save(@RequestParam RpaCategory rpaCategory){
         RpaCategory created = categoryService.save(rpaCategory);
         if (created == null) {
             return ResponseEntity.notFound().build();
@@ -59,9 +58,4 @@ public class CategoryRestController {
         }
         return ResponseEntity.noContent().build();
     }
-
-
-
-
-
 }

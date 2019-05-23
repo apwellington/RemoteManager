@@ -4,16 +4,12 @@ import com.claro.rpa.app.Auxiliar;
 import com.claro.rpa.app.model.RpaRobot;
 import com.claro.rpa.app.model.RpaUser;
 import com.claro.rpa.app.service.RobotService;
-import com.claro.rpa.app.service.UserService;
 import com.claro.rpa.app.service.UserServiceImpl;
-import com.claro.rpa.app.tools.ConfigLoader;
 import com.claro.rpa.app.tools.SCPClient;
 import com.claro.rpa.app.tools.SSHClient;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.SftpException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
@@ -21,7 +17,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-//Enviar comando por la url
+
 @RestController
 @RequestMapping("/launcher")
 public class ScriptLauncher {
@@ -49,19 +45,22 @@ public class ScriptLauncher {
     }
 
     //90% completado
-    @PostMapping(value = "/run/{botId}")
+    @PostMapping(value = "/run/{botId}/{userId}")
     @ResponseBody
-    public String runBot(@PathVariable("botId") int botId, @RequestParam String pass) throws IOException {
+    public String runBot(@PathVariable("botId") int botId, @PathVariable("userId") int userId) throws IOException {
+        String pass = "";
         String salida = "Ha Fallado";
         RpaRobot robot = robotService.findById(botId).get();
         LOGGER.info("Iniciando Metodo Run, para el robot" + robot.getName());
-        Object current = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //Object current = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         properties = new Properties();
         properties.load(new FileInputStream(config.getAbsolutePath()));
 
-        if (current instanceof UserDetails) {
-            String username = ((UserDetails)current).getUsername(); // revisar porque devuelve el id
-            RpaUser user = userService.findById(Integer.parseInt(username)).get();
+        //if (current instanceof UserDetails) {
+            //String username = ((UserDetails)current).getUsername(); // revisar porque devuelve el id
+            //String username = userService.findById(userId).get().getUsername(); // revisar porque devuelve el id
+
+            RpaUser user = userService.findById(userId).get();
             LOGGER.info("Usuario actual" + user.toString());
 
             SSHClient sshClient = new SSHClient(user.getUsername(),pass, 22, user.getDnsAddress());
@@ -90,8 +89,8 @@ public class ScriptLauncher {
                 salida = "Exito";
             }
             return salida;
-       }
-            return salida;
+      // }
+
     }
 
 

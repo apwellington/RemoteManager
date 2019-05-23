@@ -14,7 +14,7 @@ const BASE_USER = {
 
      let headers = {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization':'Basic cnBhLWNsaWVudDpycGEtc2VjcmV0',
+          //'Authorization':'Basic cnBhLWNsaWVudDpycGEtc2VjcmV0',
           'Accept': 'application/json'
       }
     
@@ -69,37 +69,58 @@ class Login extends Component {
       "email": this.state.email,
       "password": this.state.password
     }
-    
+/*
+     console.log(axios.post("http://localhost:8080/oauth/token",
+       {headers: {
+           "Accept":"application/json",
+           "Content-Type":"application/x-www-form-urlencoded",
+           'Authorization':'Basic cnBhLWNsaWVudDpycGEtc2VjcmV0'
+            }
+       },
+       {data: {
+           "grant_type": "password",
+           "client_id": "rpa-client",
+           "client_secret": "rpa-secret",
+           "scope": "read write",
+           "username": "ieuser",
+           "password": "Passw0rd!"
+        }
+       }));
+*/
+
+      //console.log(axios.post("http://localhost:8080/oauth/token"));
+
      /* return axios.get(`${BASE_URL}/oauth/token`,
             { headers: { authorization: this.createBasicAuthToken(this.state.email, this.state.password) } })*/
 
             axios.request({
- url: "/oauth/token",
- method: "post",
- baseURL: "http://localhost:8080",
-
-headers: {
-    "Accept":"application/json",
-    "Content-Type":"application/x-www-form-urlencoded",
-    'Authorization':'Basic cnBhLWNsaWVudDpycGEtc2VjcmV0'
-  },
-  
- auth: {
-   username: "rpa-client", // This is the client_id
-   password: "rpa-secret" // This is the client_secret
- },
- 
- data: {
-    "grant_type": "password",
-   "client_id": "rpa-client",
-   "client_secret": "rpa-secret",
-   "scope": "read write",
-   "username": "ieuser",
-   "password": "Passw0rd!"
- }
-}).then(respose => {
- console.log(respose);
-});
+            url: "/oauth/token",
+            method: "post",
+            baseURL: "http://localhost:8080",
+            headers: {
+                "Access-Control-Allow-Origin": '*',
+                "authorization": "Basic cnBhLWNsaWVudDpycGEtc2VjcmV0",
+                "accept": "application/json",
+                "content-type": "application/x-www-form-urlencoded",
+                "cache-control": "no-cache",
+            },
+            auth: {
+            username: "rpa-client", // This is the client_id
+            password: "rpa-secret", // This is the client_secret
+            },
+            data: {
+                "grant_type": "password",
+                "client_id": "rpa-client",
+                "client_secret": "rpa-secret",
+                "scope": "write",
+                "username": "ieuser",
+                "password": "Passw0rd!"
+            }
+            }).then(respose => {
+            console.log(respose);
+            }).catch((error)=>{
+                console.log(error);
+            });
 
  }
 
