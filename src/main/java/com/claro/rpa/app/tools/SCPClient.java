@@ -32,12 +32,12 @@ public class SCPClient {
 
     public void copyFileTO(String remotePath, String localPath, String filename) throws JSchException, SftpException, FileNotFoundException {
         localPath = localPath + "\\" + filename;
-        channel.connect();
-        localFile = new File(localPath);
-        channel.cd(remotePath);
-        channel.put(new FileInputStream(localFile),localFile.getName());
-        channel.disconnect();
-        session.disconnect();
+        this.channel.connect();
+        this.localFile = new File(localPath);
+        this.channel.cd(remotePath);
+        this.channel.put(new FileInputStream(localFile),localFile.getName());
+        this.channel.disconnect();
+        this.session.disconnect();
     }
 
     public void copyDirTO(String remotePath, String localPath) throws JSchException, SftpException, FileNotFoundException {

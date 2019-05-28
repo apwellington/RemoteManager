@@ -36,82 +36,69 @@ public class ScriptLauncher {
     UserServiceImpl userService;
 
 
-    @RequestMapping(value = "/cmd/{command}")
-    @ResponseBody
-    public String exec(@PathVariable("command") String cmd){
-        SSHClient sshClient = new SSHClient("ieuser","Passw0rd!", 22, "192.168.56.101");
-        Object obj  = sshClient.execCommand(cmd);
+    public String exec(@PathVariable("command") String cmd) {
+        SSHClient sshClient = new SSHClient("ieuser", "Passw0rd!", 22, "192.168.56.101");
+        Object obj = sshClient.execCommand(cmd);
         return obj.toString();
     }
 
-    //90% completado
+
     @PostMapping(value = "/run/{botId}/{userId}")
     @ResponseBody
-    public String runBot(@PathVariable("botId") int botId, @PathVariable("userId") int userId) throws IOException {
-        String pass = "";
-        String salida = "Ha Fallado";
+    public boolean runBot(@PathVariable("botId") int botId, @PathVariable("userId") int userId) throws IOException {
         RpaRobot robot = robotService.findById(botId).get();
         LOGGER.info("Iniciando Metodo Run, para el robot" + robot.getName());
         //Object current = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         properties = new Properties();
         properties.load(new FileInputStream(config.getAbsolutePath()));
+        RpaUser user = userService.findById(userId).get();
+        LOGGER.info("Usuario actual" + user.toString());
+        //SSHClient sshClient = new SSHClient(user.getUsername(),pass, 22, user.getDnsAddress()); linea original
+        SSHClient sshClient = new SSHClient(user.getUsername(), user.getPassword(), 22, "172.27.13.138");
+        LOGGER.info("Cliente ssh creado" + sshClient.getHost() + sshClient.getSession().isConnected());
+        String directorioBot = properties.getProperty("bot_dir");
+        LOGGER.info("Copiando Robot desde " + directorioBot + "Copiando Robot hasta" + user.getShareDirectoryPath());
+        LOGGER.info("Copiando Robot  " + robot.getName());
+        copyBot(user.getShareDirectoryPath(), directorioBot, robot.getName(), sshClient);
+        LOGGER.info("Copiando Robot" + robot.getName() + " a:" + user.getShareDirectoryPath() + "desde" + directorioBot);
+        String command = Auxiliar.buildCommand(robot, user);
+        LOGGER.info("Construyendo Comando: " + command);
 
-        //if (current instanceof UserDetails) {
-            //String username = ((UserDetails)current).getUsername(); // revisar porque devuelve el id
-            //String username = userService.findById(userId).get().getUsername(); // revisar porque devuelve el id
+        LOGGER.info("Ejecutando Comando: " + command);
+        List<Object> res = sshClient.execCommand(command);
 
-            RpaUser user = userService.findById(userId).get();
-            LOGGER.info("Usuario actual" + user.toString());
+        //List<Object> res = sshClient.execCommand("psexec \\\\127.0.0.1 -s -d -i C:\\Users\\IEUser\\Desktop\\share\\block_notas.exe");
+        String resultado = "Resultado: " + ((DataInputStream) res.get(0)) + " -- "
+                + ((BufferedReader) res.get(1)).read() + " -- "
+                + ((DataOutputStream) res.get(2)).size() + " -- "
+                + (Integer) res.get(3);
 
-            SSHClient sshClient = new SSHClient(user.getUsername(),pass, 22, user.getDnsAddress());
-            LOGGER.info("Cliente ssh creado" + sshClient.getHost());
+        LOGGER.info("Resultado del proceso: " + resultado);
 
-            String directorioBot = properties.getProperty("bot_dir");
-            copyBot(user.getShareDirectoryPath(),directorioBot ,robot.getName(), sshClient);
-            LOGGER.info("Copiando Robot"+robot.getName() +" a:" + user.getShareDirectoryPath() + "desde" + directorioBot);
-
-
-            String command = Auxiliar.buildCommand(robot, user);
-            LOGGER.info("Construyendo Comando: " + command);
-
-            LOGGER.info("Ejecutando Comando: " + command);
-            List<Object> res = sshClient.execCommand(command);
-
-            //List<Object> res = sshClient.execCommand("psexec \\\\127.0.0.1 -s -d -i C:\\Users\\IEUser\\Desktop\\share\\block_notas.exe");
-            String resultado = "Resultado: " + ((DataInputStream)res.get(0)) + " -- "
-                    + ((BufferedReader) res.get(1)).read() + " -- "
-                    +((DataOutputStream)res.get(2)).size() + " -- "
-                    +(Integer) res.get(3);
-
-            LOGGER.info("Resultado del proceso: " + resultado);
-
-            if (res.get(3) != null && res.get(3).toString().equals("-1")){
-                salida = "Exito";
-            }
-            return salida;
-      // }
-
+        if (res.get(3) != null && res.get(3).toString().equals("-1")) {
+            return true;
+        }
+        return false;
+        // }
     }
-
 
 
     //Configurar cliente
     @RequestMapping(value = "/config")
-    public Object config(@RequestParam("user_id") int id){
+    public Object config(@RequestParam("user_id") int id) {
         RpaUser user = userService.findById(id).get();
         //activar ssh cliente y servidor
         try {
             //Revisar este proceso para correr bots
-            Process p= Runtime.getRuntime().exec("ssh -V"); // cero cuando es efectivo
+            Process p = Runtime.getRuntime().exec("ssh -V"); // cero cuando es efectivo
             p.waitFor();
             int s = p.exitValue();
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-            String  pingResult = "";
+            String pingResult = "";
             String inputLine;
             // Bucle mientas reciba parametros del buffer
-            while ((inputLine = in.readLine()) != null)
-            {
+            while ((inputLine = in.readLine()) != null) {
                 // Muestra por pantalla cada una de las lineas que recibe
                 System.out.println("input" + inputLine);
                 // Si deseamos capturar el resultado para posteriormente
@@ -129,10 +116,10 @@ public class ScriptLauncher {
         //Copiar psexec
         LOGGER.info("Copiando Recursos");
 
-        this.sshClient = new SSHClient(user.getUsername(),user.getPassword(), 22, user.getDnsAddress());
+        this.sshClient = new SSHClient(user.getUsername(), user.getPassword(), 22, user.getDnsAddress());
         this.scp = new SCPClient(this.sshClient);
         try {
-            scp.copyDirTO(user.getShareDirectoryPath(),"resources/tools/PSTools");
+            scp.copyDirTO(user.getShareDirectoryPath(), "resources/tools/PSTools");
         } catch (JSchException e) {
             e.printStackTrace();
         } catch (SftpException e) {
@@ -146,10 +133,10 @@ public class ScriptLauncher {
     }
 
 
-    public boolean copyBot(String remotePath, String localPath , String filename, SSHClient ssh){
+    public boolean copyBot(String remotePath, String localPath, String filename, SSHClient ssh) {
         try {
             this.scp = new SCPClient(ssh);
-            scp.copyFileTO(remotePath, localPath, filename);
+            this.scp.copyFileTO(remotePath, localPath, filename);
             return true;
         } catch (IOException | JSchException | SftpException e) {
             e.printStackTrace();
@@ -158,11 +145,9 @@ public class ScriptLauncher {
     }
 
 
-    public void execRuntime(String cmd){
+    public void execRuntime(String cmd) {
 
     }
-
-
 
 
 }
