@@ -2,12 +2,22 @@ import React,{Component} from 'react';
 import axios from 'axios';
 import {Link } from 'react-router-dom';
 
+const BASE_URL = "http://localhost:8080";
+
 class Robots extends Component {
   
 
   handleClick () {
-  axios.get('https://api.github.com/users/maecapozzi')
-    .then(response => console.log(response))
+  axios.post(BASE_URL+'/launcher/run/1/11'/*, {
+    robot: '1',
+    user: '11'
+  }*/)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
 }
   render(){
