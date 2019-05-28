@@ -54,7 +54,7 @@ public class ScriptLauncher {
         RpaUser user = userService.findById(userId).get();
         LOGGER.info("Usuario actual" + user.toString());
         //SSHClient sshClient = new SSHClient(user.getUsername(),pass, 22, user.getDnsAddress()); linea original
-        SSHClient sshClient = new SSHClient(user.getUsername(), user.getPassword(), 22, "172.27.13.138");
+        SSHClient sshClient = new SSHClient(user.getUsername(), user.getPassword(), 22, "192.168.56.101");
         LOGGER.info("Cliente ssh creado" + sshClient.getHost() + sshClient.getSession().isConnected());
         String directorioBot = properties.getProperty("bot_dir");
         LOGGER.info("Copiando Robot desde " + directorioBot + "Copiando Robot hasta" + user.getShareDirectoryPath());
